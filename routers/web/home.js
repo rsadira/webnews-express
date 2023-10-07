@@ -12,5 +12,8 @@ homeRouter.get("/feedback", homeController.indexFeedback);
 
 // Page News Create
 homeRouter.get("/news-create", newsController.pageCreateNews);
+homeRouter.get("/news/:id/edit", newsController.renderUpdateNewsForm);
+
+homeRouter.post("/update-news/:id", newsController.updateNews);
 
 module.exports = homeRouter;

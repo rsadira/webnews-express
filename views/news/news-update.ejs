@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= pageTitle %>
+    </title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="mt4">
+                <h1>
+                    <%= pageTitle %>
+                </h1>
+
+                <!-- Form for updating news -->
+                <form class="mt-5" id="update-news-form" action="/update-news/<%= existingNews.id %>" method="POST">
+                    <!-- Hidden input for specifying PUT method -->
+                    <input type="hidden" name="_method" value="PUT">
+
+                    <!-- Input fields for updating news data -->
+                    <div class="form-group">
+                        <label for="title">Judul</label>
+                        <input type="text" class="form-control" id="title" name="title"
+                            value="<%= existingNews.title %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cover">Cover</label>
+                        <input type="text" class="form-control" id="cover" name="cover"
+                            value="<%= existingNews.cover %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Isi Berita</label>
+                        <textarea id="content" name="content"><%= existingNews.content %></textarea>
+                    </div>
+
+                    <!-- Submit button for updating news -->
+                    <button type="submit" class="btn btn-primary float-right">Update News</button>
+                </form>
+
+
+            </div>
+        </div> <!-- Add any additional content or styling as needed -->
+    </div>
+</body>
+
+</html>
