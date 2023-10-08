@@ -56,6 +56,21 @@ class HomeController {
 
     res.status(201).json(store);
   }
+
+  async updateNews(req, res) {
+    try {
+      const id = req.params.id;
+      const updateData = req.body; // Updated news data
+
+      // Call the service method to update the news by ID
+      const updatedNews = await newsService.updateNews(id, updateData);
+
+      res.redirect("/"); // Redirect to the homepage or another appropriate page
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  }
 }
 
 module.exports = HomeController;

@@ -19,5 +19,19 @@ class CommentService {
 
     return commentNew;
   }
+
+  async deleteComment(commentId) {
+    // Assuming `commentModel` is your Sequelize model for comments
+    const commentToDelete = await this.commentModel.findByPk(commentId);
+
+    if (!commentToDelete) {
+      throw new Error("Comment not found");
+    }
+
+    // Delete the comment
+    await commentToDelete.destroy();
+
+    return commentToDelete;
+  }
 }
 module.exports = CommentService;
