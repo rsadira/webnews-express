@@ -15,8 +15,6 @@ class CommentController {
   async deleteComment(req, res) {
     try {
       const commentId = req.params.id;
-
-      // Use your CommentService to delete the comment by ID
       const deletedComment = await commentService.deleteComment(commentId);
 
       res.status(200).json(deletedComment);

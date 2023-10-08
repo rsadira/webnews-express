@@ -30,6 +30,9 @@
                             <%= comment.comment %>
                         </p>
                     </div>
+                    <form action="/api/v1/comments/<%= comment.id %>" method="DELETE">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                     <hr>
                     <% }); %>
             </div>

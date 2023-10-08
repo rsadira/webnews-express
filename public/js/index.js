@@ -31,29 +31,6 @@ $(document).ready(function () {
         alert("Gagal menyimpan berita.");
       },
     });
-    $("#update-news-form").submit(function (event) {
-      event.preventDefault();
-
-      let formData = new FormData($(this)[0]);
-      let newsId = formData.get("newsId");
-
-      $.ajax({
-        url: `/api/v1/news/${newsId}`, // Use the appropriate URL for news update
-        type: "PUT",
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          alert("Berita berhasil diperbarui.");
-          // Redirect to the news detail page or perform other actions as needed
-          window.location.href = `/news/${newsId}`;
-        },
-        error: function (error) {
-          console.error("Terjadi kesalahan: " + JSON.stringify(error));
-          alert("Gagal memperbarui berita.");
-        },
-      });
-    });
   });
 });
 
@@ -82,31 +59,45 @@ $("#comment-form").submit(function (event) {
 
   $("#name").val("");
   $("#comment").val("");
+
+  $.ajax({
+    url: `/api/v1/comments/${commentId}`,
+    type: "DELETE",
+    success: function (response) {
+      alert("Komentar berhasil dihapus.");
+      const newsId = response.newsId;
+      // Redirect to the news page associated with the deleted comment
+      window.location.href = `/news/${newsId}`;
+    },
+    error: function (error) {
+      console.error("Error:", error);
+      alert("Gagal menghapus komentar.");
+    },
+  });
 });
 
-// $(document).ready(function () {
-//   // AJAX code for updating news
-//   $("#update-news-form").submit(function (event) {
-//     event.preventDefault();
+$(document).ready(function () {
+  $("#update-news-form").submit(function (event) {
+    event.preventDefault();
 
-//     let formData = new FormData($(this)[0]);
-//     let newsId = formData.get("newsId");
+    let formData = new FormData($(this)[0]);
+    let newsId = formData.get("newsId");
 
-//     $.ajax({
-//       url: `/api/v1/news/${newsId}`, // Use the appropriate URL for news update
-//       type: "PUT",
-//       data: formData,
-//       processData: false,
-//       contentType: false,
-//       success: function (response) {
-//         alert("Berita berhasil diperbarui.");
-//         // Redirect to the news detail page or perform other actions as needed
-//         window.location.href = `/news/${newsId}`;
-//       },
-//       error: function (error) {
-//         console.error("Terjadi kesalahan: " + JSON.stringify(error));
-//         alert("Gagal memperbarui berita.");
-//       },
-//     });
-//   });
-// });
+    $.ajax({
+      url: `/api/v1/news/${newsId}`, // Use the appropriate URL for news update
+      type: "PUT",
+      data: formData,
+      processData: false,
+      contentType: false,
+      success: function (response) {
+        alert("Berita berhasil diperbarui.");
+        // Redirect to the news detail page or perform other actions as needed
+        window.location.href = `/news/${newsId}`;
+      },
+      error: function (error) {
+        console.error("Terjadi kesalahan: " + JSON.stringify(error));
+        alert("Gagal memperbarui berita.");
+      },
+    });
+  });
+});
