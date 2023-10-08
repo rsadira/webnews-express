@@ -51,18 +51,18 @@ class NewsService {
     return news;
   }
 
-  async updateNews(id, updatedData) {
+  async updateNews(newsId, updatedData) {
     // Assuming `newsModel` is your Sequelize model for news articles
-    const existingNews = await this.newsModel.findByPk(id);
+    const existingNews = await this.newsModel.findByPk(newsId);
 
     if (!existingNews) {
       throw new Error("News article not found");
     }
 
     // Update the existing news article with the new data
-    const updatedNews = await existingNews.update(updatedData);
+    await existingNews.update(updatedData);
 
-    return updatedNews;
+    return existingNews;
   }
 }
 

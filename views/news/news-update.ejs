@@ -18,7 +18,7 @@
                 </h1>
 
                 <!-- Form for updating news -->
-                <form class="mt-5" id="update-news-form" action="/update-news/<%= existingNews.id %>" method="POST">
+                <form class="mt-5" id="update-news-form" action="/news/<%= existingNews.id %>" method="PUT">
                     <!-- Hidden input for specifying PUT method -->
                     <input type="hidden" name="_method" value="PUT">
 
